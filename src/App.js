@@ -8,7 +8,7 @@ import Search from './Search'
 
 class BooksApp extends Component {
   state = {
-    booksList:[]
+    booksList:[],
   }
 
   componentDidMount () {
@@ -24,11 +24,26 @@ class BooksApp extends Component {
     })
   }
 
+
+
+  changeBookStatus = (title, event) =>{
+    event.stopPropagation()
+    const { booksList } = this.state
+    const { value } = event.target
+    const newBooksList = [...booksList]
+    booksList.forEach( (book, i) => {
+      if(book.title === title) {
+        newBooksList[i].shelf = value
+        this.setState({newBooksList})
+      }
+    })
+    }
+
   render() {
     const { booksList } = this.state
     return (
       <div className="app">
-        <Route exact path='/' render={ () => <Main booksList={booksList}/>} />
+        <Route exact path='/' render={ () => <Main booksList={booksList} onChangeBookStatus={this.changeBookStatus}/>} />
         <Route path='/Search' component={Search} />
       </div>
     )
