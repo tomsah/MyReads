@@ -14,11 +14,12 @@ class BooksApp extends Component {
   componentDidMount() {
     BooksAPI.getAll().then(books => {
       const dataBooksFiltered = books.map(
-        ({ title, authors, shelf, imageLinks }) => ({
+        ({ title, authors, shelf, imageLinks, id }) => ({
           title,
           authors,
           shelf,
-          imageUrl: imageLinks.thumbnail
+          imageUrl: imageLinks.thumbnail,
+          id
         })
       );
       this.setState({ booksList: dataBooksFiltered });
@@ -41,6 +42,7 @@ class BooksApp extends Component {
       : this.setState({
           booksList: [...newBooksList, { ...bookUpdate, shelf: value }]
         });
+      BooksAPI.update(bookUpdate, value)
   };
 
   render() {

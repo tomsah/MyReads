@@ -23,7 +23,7 @@ class Search extends Component {
       }
       // this.setState({noResult: null })
       const dataBooksFiltered = books.map(
-        ({ title, authors, shelf, imageLinks = {} }) => {
+        ({ title, authors, shelf, imageLinks = {}, id }) => {
           const isBookInLib = booksList.find(b => {
             return b.title === title;
           });
@@ -31,7 +31,8 @@ class Search extends Component {
             title,
             authors,
             shelf: isBookInLib ? isBookInLib.shelf : "none",
-            imageUrl: imageLinks.thumbnail
+            imageUrl: imageLinks.thumbnail,
+            id
           };
         }
       );
