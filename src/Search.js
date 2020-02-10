@@ -12,18 +12,17 @@ class Search extends Component {
 
   handleSearch = event => {
     const { booksList } = this.props;
-    this.setState({ searchInput: event.target.value });
-
-    if (!event.target.value) {
-      return this.setState({ searchBookList: [] });
-    }
+    this.setState({ searchInput: event.target.value});
     search(event.target.value).then(books => {
+      if (this.state.searchInput === "") {
+        return this.setState({ searchBookList: [], noResult: null});
+      }
+
       if (books.error) {
         return this.setState({ noResult: books.error });
       }
-      // this.setState({noResult: null })
       const dataBooksFiltered = books.map(
-        ({ title, authors, shelf, imageLinks = {}, id }) => {
+        ({ title, authors ='Authors unknown', shelf, imageLinks = {}, id }) => {
           const isBookInLib = booksList.find(b => {
             return b.title === title;
           });
@@ -36,9 +35,13 @@ class Search extends Component {
           };
         }
       );
-      return this.setState({ searchBookList: dataBooksFiltered });
+      return this.setState({ searchBookList: dataBooksFiltered, noResult: null });
     });
   };
+
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   if(this.state.searchInput !== nextState.searchInput) return true
+  // }
 
   render() {
     const { noResult, searchBookList } = this.state;

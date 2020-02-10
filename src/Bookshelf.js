@@ -13,7 +13,7 @@ const Bookshelf = ({ shelfBooksList, searchBookList, onChangeBookStatus }) => {
                 </li>
               );
             })
-          : "Please add a book or type a search "}
+          : null}
       </ol>
     </div>
   );
