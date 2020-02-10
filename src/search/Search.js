@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { search } from "./BooksAPI";
-import Bookshelf from "./Bookshelf";
+import { search } from "../main/BooksAPI";
+import Bookshelf from "../main/Bookshelf";
 
 class Search extends Component {
   state = {
@@ -12,14 +12,18 @@ class Search extends Component {
 
   handleSearch = event => {
     const { booksList } = this.props;
-    const { searchInput } = this.state;
     const { value } = event.target;
 
+    // set the Input Value
     this.setState({ searchInput: value });
-    search(value).then(books => {
-      if (searchInput === "") {
-        return this.setState({ searchBookList: [], noResult: null });
-      }
+
+    // when the input filed is empty reset our local state
+    if (value === "") {
+      return this.setState({ searchBookList: [], noResult: null });
+    }
+
+    // only trigger the search when there is a value
+    value && search(value).then(books => {
 
       if (books.error) {
         return this.setState({ noResult: books.error });

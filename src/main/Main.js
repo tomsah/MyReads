@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "./Header";
-import SearchNav from "./SearchNav";
+import SearchNav from "../search/SearchNav";
 import Bookshelf from "./Bookshelf";
 
 const shelves = {
