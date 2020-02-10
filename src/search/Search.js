@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { throttle } from 'throttle-debounce';
 import { Link } from "react-router-dom";
 import { search } from "../main/BooksAPI";
 import Bookshelf from "../main/Bookshelf";
@@ -68,7 +69,7 @@ class Search extends Component {
               name="searchTerm"
               placeholder="Search by title or author"
               value={this.state.searchInput}
-              onChange={this.handleSearch}
+              onChange={throttle(300, this.handleSearch)}
             />
           </div>
         </div>
