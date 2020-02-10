@@ -1,18 +1,30 @@
-import React  from 'react'
-import BookChanger from './BookChanger'
+import React from "react";
+import BookChanger from "./BookChanger";
 
-const Book = ({imageUrl, title, author, shelf, onChangeBookStatus}) => {
-  return(
+const Book = ({ book, onChangeBookStatus, booksList }) => {
+  return (
     <div className="book">
       <div className="book-top">
-        <div className="book-cover" style={{ width: 128, height: 193, backgroundImage:`url(${imageUrl})` }} />
-        { <BookChanger title={title} shelf={shelf} onChangeBookStatus={onChangeBookStatus}/> }
+        <div
+          className="book-cover"
+          style={{
+            width: 128,
+            height: 193,
+            backgroundImage: `url(${book.imageUrl})`
+          }}
+        />
+        {
+          <BookChanger
+            book={book}
+            booksList={booksList}
+            onChangeBookStatus={onChangeBookStatus}
+          />
+        }
       </div>
-      <div className="book-title">{title}</div>
-      <div className="book-authors">{author}</div>
+      <div className="book-title">{book.title}</div>
+      <div className="book-authors">{book.authors}</div>
     </div>
-  )
-}
+  );
+};
 
-export default Book
-
+export default Book;

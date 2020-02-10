@@ -1,20 +1,22 @@
-import React from 'react'
-import Book from './Book'
+import React from "react";
+import Book from "./Book";
 
-const Bookshelf = ({shelfBooksList, onChangeBookStatus}) => {
-  return <div className="bookshelf-books">
-    <ol className="books-grid">
-      {
-        shelfBooksList.map(book => (
-          <li key={book.title}>
-            {
-              <Book title={book.title} author={book.authors} imageUrl={book.imageUrl} shelf={book.shelf} onChangeBookStatus={onChangeBookStatus} />
-            }
-          </li>
-        ))
-      }
-    </ol>
-  </div>
-}
+const Bookshelf = ({ shelfBooksList, searchBookList, onChangeBookStatus }) => {
+  return (
+    <div className="bookshelf-books">
+      <ol className="books-grid">
+        {shelfBooksList.length > 0
+          ? shelfBooksList.map((book, i) => {
+              return (
+                <li key={`${book.title}-${i}`}>
+                  {<Book book={book} onChangeBookStatus={onChangeBookStatus} />}
+                </li>
+              );
+            })
+          : "Please add a book or type a search "}
+      </ol>
+    </div>
+  );
+};
 
-export default Bookshelf
+export default Bookshelf;
