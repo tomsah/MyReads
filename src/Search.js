@@ -12,20 +12,28 @@ class Search extends Component {
 
   handleSearch = event => {
     const { booksList } = this.props;
-    this.setState({ searchInput: event.target.value});
-    search(event.target.value).then(books => {
-      if (this.state.searchInput === "") {
-        return this.setState({ searchBookList: [], noResult: null});
+    const { searchInput } = this.state;
+    const { value } = event.target;
+
+    this.setState({ searchInput: value });
+    search(value).then(books => {
+      if (searchInput === "") {
+        return this.setState({ searchBookList: [], noResult: null });
       }
 
       if (books.error) {
         return this.setState({ noResult: books.error });
       }
+
       const dataBooksFiltered = books.map(
-        ({ title, authors ='Authors unknown', shelf, imageLinks = {}, id }) => {
-          const isBookInLib = booksList.find(b => {
-            return b.title === title;
-          });
+        ({
+          title,
+          authors = "Authors unknown",
+          shelf,
+          imageLinks = {},
+          id
+        }) => {
+          const isBookInLib = booksList.find(b => b.title === title);
           return {
             title,
             authors,
@@ -35,13 +43,12 @@ class Search extends Component {
           };
         }
       );
-      return this.setState({ searchBookList: dataBooksFiltered, noResult: null });
+      return this.setState({
+        searchBookList: dataBooksFiltered,
+        noResult: null
+      });
     });
   };
-
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   if(this.state.searchInput !== nextState.searchInput) return true
-  // }
 
   render() {
     const { noResult, searchBookList } = this.state;
@@ -49,10 +56,8 @@ class Search extends Component {
     return (
       <div className="search-books">
         <div className="search-books-bar">
-          <Link to="/" className="close-search">
-            {" "}
-            Close{" "}
-          </Link>
+          <Link to="/" className="close-search" />
+
           <div className="search-books-input-wrapper">
             <input
               type="text"
@@ -67,12 +72,12 @@ class Search extends Component {
         <div className="search-books-results">
           {noResult ? (
             <div>
-              oooppps!!!, sorry we do not have anything matching your search
+              oopsy!!!, sorry we did not find anything matching your search, try
+              again :)
             </div>
           ) : (
             <Bookshelf
               shelfBooksList={searchBookList}
-              searchBookList={searchBookList}
               onChangeBookStatus={onChangeBookStatus}
             />
           )}

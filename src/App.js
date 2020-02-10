@@ -14,7 +14,13 @@ class BooksApp extends Component {
   componentDidMount() {
     BooksAPI.getAll().then(books => {
       const dataBooksFiltered = books.map(
-        ({ title, authors, shelf, imageLinks, id }) => ({
+        ({
+          title,
+          authors = "Authors unknown",
+          shelf,
+          imageLinks = {},
+          id
+        }) => ({
           title,
           authors,
           shelf,
@@ -42,7 +48,7 @@ class BooksApp extends Component {
       : this.setState({
           booksList: [...newBooksList, { ...bookUpdate, shelf: value }]
         });
-      BooksAPI.update(bookUpdate, value)
+    BooksAPI.update(bookUpdate, value);
   };
 
   render() {
@@ -63,8 +69,8 @@ class BooksApp extends Component {
           path="/Search"
           render={() => (
             <Search
-              onChangeBookStatus={this.changeBookStatus}
               booksList={booksList}
+              onChangeBookStatus={this.changeBookStatus}
             />
           )}
         />
