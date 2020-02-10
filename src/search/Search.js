@@ -76,7 +76,7 @@ class Search extends Component {
 
         <div className="search-books-results">
           {noResult ? (
-            <div>
+            <div className='no-result-message'>
               oopsy!!!, sorry we did not find anything matching your search, try
               again :)
             </div>
