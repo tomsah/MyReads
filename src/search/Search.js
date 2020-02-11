@@ -11,6 +11,15 @@ class Search extends Component {
     noResult: null
   };
 
+  /**
+   * HandleSearch Function will setStates and
+   * fetch list of books calling search from BooksAPI
+   * it will filter books data and only return what we need
+   *
+   * @param event object
+   * @return state object and an array of books
+   */
+
   handleSearch = event => {
     const { booksList } = this.props;
     const { value } = event.target;
@@ -20,7 +29,7 @@ class Search extends Component {
 
     // when the input filed is empty reset our local state
     if (value === "") {
-      return this.setState({ searchBookList: [], noResult: null });
+       this.setState({ searchBookList: [], noResult: null });
     }
 
     // only trigger the search when there is a value

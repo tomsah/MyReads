@@ -11,7 +11,13 @@ class BooksApp extends Component {
     booksList: []
   };
 
+
   componentDidMount() {
+    /**
+     * we are getting all the user books by calling getAll from BooksAPI
+     * we are filtering the book data and only returning what we need
+     * @return state object with an array of books
+     */
     BooksAPI.getAll().then(books => {
       const dataBooksFiltered = books.map(
         ({
@@ -31,6 +37,14 @@ class BooksApp extends Component {
       this.setState({ booksList: dataBooksFiltered });
     });
   }
+
+  /**
+   * changeBookStatus will update the shelf property of book
+   * and update the DB by calling update from BooksAPI
+   * @param bookUpdate Array
+   * @param event object
+   * @return state object
+   */
 
   changeBookStatus = (bookUpdate, event) => {
     event.stopPropagation();
