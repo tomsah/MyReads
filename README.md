@@ -15,7 +15,7 @@ this app was build using
 * [npm](https://www.npmjs.com/get-npm)
 * [Node.js](https://nodejs.org/en/) >= 6.x
 
-1. In Terminal, clone the git project using `$ git clone https://github.com/tomsah/Udacity-create-contact-app.git`.
+1. In Terminal, clone the git project using `$ git clone https://github.com/tomsah/MyReads.git`.
 2. Navigate to the root directory for the project.
 3. Run the command `npm install` to install the necessary dependencies
 3. Run the command `npm start` to start the server. This will automatically open the website in your browser.
